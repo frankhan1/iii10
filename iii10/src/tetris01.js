@@ -1,5 +1,6 @@
 var Tetris01Layer = cc.Layer.extend({
     sprite: null,
+    size: null,
     dx: 10, // remove range
     dy: 1,  // dropping  range
     counter: 0,
@@ -16,41 +17,45 @@ var Tetris01Layer = cc.Layer.extend({
     ny: [[-30, -30, -10, 10, 10, 30, 30, 10, -10, -10], [0, 20, 20, 20, 0, 0, -20, -20, -20, 0], [30, 30, 10, -10, -10, -30, -30, -10, 10, 10], [0, -20, -20, -20, 0, 0, 20, 20, 20, 0]],
     zy: [[-20, -20, -20, 0, 0, 20, 20, 20, 0, 0], [-10, 10, 30, 30, 10, 10, -10, -30, -30, -10], [20, 20, 20, 0, 0, -20, -20, -20, 0, 0], [10, -10, -30, -30, -10, -10, 10, 30, 30, 10]],
     Ty: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+    tArray: [],
 
     ctor: function () {
         this._super();
-        var size = cc.winSize;
-        this.t = parseInt(Math.random() * 7);
+        this.size = cc.winSize;
+        // this.t = parseInt(Math.random() * 84);
+        for (var i = 0; i < 200; i++) {
+            this.tArray[i] = i
+        }
         var title = new cc.LabelTTF("TETRIS", "Arial", 38);
-        title.x = size.width / 8;
-        title.y = size.height * 8 / 9;
+        title.x = this.size.width / 8;
+        title.y = this.size.height * 8 / 9;
         title.ignoreAnchorPointForPosition(false);
         this.addChild(title, 1);
 
         var title1 = new cc.LabelTTF("space key --> PAUSE ", "Arial", 20);
-        title1.x = size.width / 8;
-        title1.y = size.height * 6 / 9;
+        title1.x = this.size.width / 8;
+        title1.y = this.size.height * 6 / 9;
         title1.setColor(cc.color(0, 0, 255));
         title1.ignoreAnchorPointForPosition(false);
         this.addChild(title1, 1);
 
         var title2 = new cc.LabelTTF("enter key --> RESUME ", "Arial", 20);
-        title2.x = size.width / 8;
-        title2.y = size.height * 5 / 9;
+        title2.x = this.size.width / 8;
+        title2.y = this.size.height * 5 / 9;
         title2.setColor(cc.color(0, 0, 255));
         title2.ignoreAnchorPointForPosition(false);
         this.addChild(title2, 1);
 
         var title3 = new cc.LabelTTF("◤left▲turn▼down◥right", "Arial", 20);
-        title3.x = size.width / 8;
-        title3.y = size.height * 4 / 9;
+        title3.x = this.size.width / 8;
+        title3.y = this.size.height * 4 / 9;
         title3.setColor(cc.color(0, 0, 255));
         title3.ignoreAnchorPointForPosition(false);
         this.addChild(title3, 1);
 
         var t2 = new cc.LabelTTF("SCORE : ", "", 20);
         t2.x = 750;
-        t2.y = size.height * 8 / 10;
+        t2.y = this.size.height * 8 / 10;
         t2.setColor(cc.color(255, 0, 0));
         t2.ignoreAnchorPointForPosition(false);
         this.addChild(t2, 1);
@@ -58,7 +63,7 @@ var Tetris01Layer = cc.Layer.extend({
         this.t3 = new cc.LabelTTF(" ", "", 20);
         this.t3.attr({
             x: 850,
-            y: size.height * 8 / 10
+            y: this.size.height * 8 / 10
         });
         this.t3.setColor(cc.color(255, 0, 0));
         this.t3.ignoreAnchorPointForPosition(false);
@@ -68,13 +73,13 @@ var Tetris01Layer = cc.Layer.extend({
             cc.color(255, 255, 255, 100),
             100, 38);
         this.t3c.x = 850;
-        this.t3c.y = size.height * 8 / 10;
+        this.t3c.y = this.size.height * 8 / 10;
         this.t3c.ignoreAnchorPointForPosition(false);
         this.addChild(this.t3c, 1);
 
         var t4 = new cc.LabelTTF("TIME : ", "", 20);
         t4.x = 750;
-        t4.y = size.height * 7 / 10;
+        t4.y = this.size.height * 7 / 10;
         t4.setColor(cc.color(255, 0, 0));
         t4.ignoreAnchorPointForPosition(false);
         this.addChild(t4, 1);
@@ -82,7 +87,7 @@ var Tetris01Layer = cc.Layer.extend({
         this.t5 = new cc.LabelTTF(" ", "", 20);
         this.t5.attr({
             x: 850,
-            y: size.height * 7 / 10
+            y: this.size.height * 7 / 10
         });
         this.t5.setColor(cc.color(255, 0, 0));
         this.t5.ignoreAnchorPointForPosition(false);
@@ -92,73 +97,25 @@ var Tetris01Layer = cc.Layer.extend({
             cc.color(255, 255, 255, 100),
             100, 38);
         this.t5c.x = 850;
-        this.t5c.y = size.height * 7 / 10;
+        this.t5c.y = this.size.height * 7 / 10;
         this.t5c.ignoreAnchorPointForPosition(false);
         this.addChild(this.t5c, 1);
 
+        this.russia = new cc.Sprite(res.Russia_png);
+        this.russia.attr({
+            x: this.size.width * 4.2 / 9,
+            y: this.size.height * 98 / 100
+        });
+        this.addChild(this.russia, 3);
+
         this.tetris = new cc.Sprite(res.Bg_png);
         this.tetris.attr({
-            x: size.width / 2,
-            y: size.height / 2
+            x: this.size.width / 2,
+            y: this.size.height / 2
         });
         this.addChild(this.tetris, 0);
 
-        this.tetris[0] = new cc.Sprite(res.TB);
-        this.tetris[0].attr({
-            x: size.width * 4.5 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[0], 2);
-
-        this.tetris[1] = new cc.Sprite(res.IG);
-        this.tetris[1].attr({
-            x: size.width * 4.5 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[1], 2);
-
-        this.tetris[2] = new cc.Sprite(res.OO);
-        this.tetris[2].attr({
-            x: size.width * 4 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[2], 2);
-
-        this.tetris[3] = new cc.Sprite(res.LR);
-        this.tetris[3].attr({
-            x: size.width * 4 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[3], 2);
-
-        this.tetris[4] = new cc.Sprite(res.JP);
-        this.tetris[4].attr({
-            x: size.width * 4 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[4], 2);
-
-        this.tetris[5] = new cc.Sprite(res.NB);
-        this.tetris[5].attr({
-            x: size.width * 4 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[5], 2);
-
-        this.tetris[6] = new cc.Sprite(res.ZP);
-        this.tetris[6].attr({
-            x: size.width * 4 / 9,
-            y: size.height * 99 / 100
-        });
-        this.addChild(this.tetris[6], 2);
-
-        this.tetris[3] = new cc.Sprite(res.LR);
-        this.tetris[3].attr({
-            x: size.width * 4 / 9,
-            y: size.height
-        });
-        this.addChild(this.tetris[3], 2);
-
+        this.tetrisCreate(this);
         this.myKeyListener(this);
         this.scheduleUpdate();
 
@@ -218,50 +175,50 @@ var Tetris01Layer = cc.Layer.extend({
 
     update: function (dt) {
 
-        switch (this.t) {  // random of 7 kinds shape T , I , O , L , J , N , Z
-            case 0:
+        switch (this.t % 7) {  // random of 7 kinds shape T , I , O , L , J , N , Z
+            case 0 :   //  T
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.ty[i][j]
                     }
                 }
                 break;
-            case 1:
+            case 1 :   //  I
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.iy[i][j]
                     }
                 }
                 break;
-            case 2:
+            case 2 :   //  O
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.oy[i][j]
                     }
                 }
                 break;
-            case 3:
+            case 3 :   //  L
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.ly[i][j]
                     }
                 }
                 break;
-            case 4:
+            case 4 :   //  J
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.jy[i][j]
                     }
                 }
                 break;
-            case 5:
+            case 5 :   //  N
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.ny[i][j]
                     }
                 }
                 break;
-            case 6:
+            case 6 :   //  Z
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 10; j++) {
                         this.Ty[i][j] = this.tetris[this.t].y + this.zy[i][j]
@@ -270,9 +227,9 @@ var Tetris01Layer = cc.Layer.extend({
                 break;
         }
 
-        var tt = parseInt((this.tetris[this.t].x - 250) / 20)+1;
-        switch (this.t) {
-            case 0 :  //  T
+        var tt = parseInt((this.tetris[this.t].x - 250) / 20) + 1;
+        switch (this.t % 7) {
+            case 0 :   //  T
                 switch (this.td) {
                     case 0 : //  T T
                         if ((this.Ty[0][0] > this.Ry[tt - 1]) && (this.Ty[0][2] > this.Ry[tt]) && (this.Ty[0][4] > this.Ry[tt + 1])) {
@@ -280,11 +237,14 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
+
                             this.score(this);
                             this.myLog(this);
-                           // cc.log("0- " + this.Ry[0] + " 1- " + this.Ry[1] + " 2- " + this.Ry[2] + " 3- " + this.Ry[3] + " 4- " + this.Ry[4] + " 5- " + this.Ry[5] + " 6- " + this.Ry[6] + " 7- " + this.Ry[7] + " 8- " + this.Ry[8] + " 9- " + this.Ry[9] + " 10- " + this.Ry[10] + " 11- " + this.Ry[11] + " 12- " + this.Ry[12] + " 13- " + this.Ry[13] + " 14- " + this.Ry[14] + " 15- " + this.Ry[15] + " 16- " + this.Ry[16] + " 17- " + this.Ry[17] + " 18- " + this.Ry[18] + " 19- " + this.Ry[19] + " 20- " + this.Ry[20]);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
+                            // cc.log("0- " + this.Ry[0] + " 1- " + this.Ry[1] + " 2- " + this.Ry[2] + " 3- " + this.Ry[3] + " 4- " + this.Ry[4] + " 5- " + this.Ry[5] + " 6- " + this.Ry[6] + " 7- " + this.Ry[7] + " 8- " + this.Ry[8] + " 9- " + this.Ry[9] + " 10- " + this.Ry[10] + " 11- " + this.Ry[11] + " 12- " + this.Ry[12] + " 13- " + this.Ry[13] + " 14- " + this.Ry[14] + " 15- " + this.Ry[15] + " 16- " + this.Ry[16] + " 17- " + this.Ry[17] + " 18- " + this.Ry[18] + " 19- " + this.Ry[19] + " 20- " + this.Ry[20]);
                         }
 
                         break;
@@ -295,10 +255,13 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 60;
                             this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
+
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  T _|_
@@ -308,10 +271,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt + 1] = z + 20;
                             this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  T --|
@@ -321,15 +286,17 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = z + 40;
                             this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 1 :  //  I
+            case 1 :   //  I
                 switch (this.td) {
                     case 0 : //  I ▁
                         if ((this.Ty[0][0] > this.Ry[tt - 2]) && (this.Ty[0][1] > this.Ry[tt - 1]) && (this.Ty[0][2] > this.Ry[tt]) && (this.Ty[0][3] > this.Ry[tt + 1])) {
@@ -337,10 +304,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 2], this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 2] = this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // I |
@@ -348,10 +317,12 @@ var Tetris01Layer = cc.Layer.extend({
                             this.tetris[this.t].y -= this.dy
                         } else {
                             this.Ry[tt] += 80;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  I --
@@ -360,10 +331,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 2], this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 2] = this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  I |
@@ -371,15 +344,17 @@ var Tetris01Layer = cc.Layer.extend({
                             this.tetris[this.t].y -= this.dy
                         } else {
                             this.Ry[tt] += 80;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 2 :  //  O
+            case 2 :   //  O
                 switch (this.td) {
                     case 0 : //  O O
                         if ((this.Ty[0][0] > this.Ry[tt - 1]) && (this.Ty[0][1] > this.Ry[tt])) {
@@ -387,10 +362,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // O O
@@ -399,10 +376,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    // O O
@@ -411,10 +390,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :     // O O
@@ -423,15 +404,17 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 3 :  //  L
+            case 3 :   //  L
                 switch (this.td) {
                     case 0 : //  L L
                         if ((this.Ty[0][0] > this.Ry[tt - 1]) && (this.Ty[0][1] > this.Ry[tt])) {
@@ -440,10 +423,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 60;
                             this.Ry[tt] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // L  __|
@@ -453,10 +438,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 20;
                             this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  L  7
@@ -465,10 +452,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  L  ┌--
@@ -477,15 +466,17 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 4 :  //  J
+            case 4 :   //  J
                 switch (this.td) {
                     case 0 : //  J J
                         if ((this.Ty[0][0] > this.Ry[tt - 1]) && (this.Ty[0][1] > this.Ry[tt])) {
@@ -494,10 +485,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 20;
                             this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // J
@@ -506,10 +499,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  J
@@ -518,10 +513,12 @@ var Tetris01Layer = cc.Layer.extend({
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  J └—
@@ -531,15 +528,17 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = z + 40;
                             this.Ry[tt] = this.Ry[tt + 1] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 5 :  //  N
+            case 5 :   //  N
                 switch (this.td) {
                     case 0 : //  N N
                         if ((this.Ty[0][8] > this.Ry[tt - 1]) && (this.Ty[0][0] > this.Ry[tt])) {
@@ -548,10 +547,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 60;
                             this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // N _|▔
@@ -561,10 +562,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = z + 20;
                             this.Ry[tt] = this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  N N
@@ -574,10 +577,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 60;
                             this.Ry[tt] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    // N _|▔
@@ -587,15 +592,17 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = z + 20;
                             this.Ry[tt] = this.Ry[tt + 1] = z + 40;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
-            case 6 :  //  Z
+            case 6 :   //  Z
                 switch (this.td) {
                     case 0 : //  Z Z
                         if ((this.Ty[0][8] > this.Ry[tt - 1]) && (this.Ty[0][0] > this.Ry[tt]) && (this.Ty[0][1] > this.Ry[tt + 1])) {
@@ -604,10 +611,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
                             this.Ry[tt + 1] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // Z ┌┘
@@ -617,10 +626,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 40;
                             this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 : //  Z Z
@@ -630,10 +641,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
                             this.Ry[tt + 1] = z + 20;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :   // Z ┌┘
@@ -643,10 +656,12 @@ var Tetris01Layer = cc.Layer.extend({
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 40;
                             this.Ry[tt] = z + 60;
-                            this.t = parseInt(Math.random() * 7);
-                            this.td = 0;
+                            this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
+                            this.td = 0;
+                            this.tetris[this.t].y = 640;
+                            this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -669,10 +684,72 @@ var Tetris01Layer = cc.Layer.extend({
         layer.t3.setString(layer.t3s);
     },
 
-    myLog : function(layer){
-        cc.log("X: "+layer.tetris[layer.t].x+" Y: "+layer.tetris[layer.t].y+" '0:' " + layer.Ry[0] + " " + layer.Ry[1] + " " + layer.Ry[2] + " " + layer.Ry[3] + " " + layer.Ry[4] + " '5:' " + layer.Ry[5] + " " + layer.Ry[6] + " " + layer.Ry[7] + " " + layer.Ry[8] + " " + layer.Ry[9] + " '10-' " + layer.Ry[10] + " " + layer.Ry[11] + " " + layer.Ry[12] + " " + layer.Ry[13] + " " + layer.Ry[14] + " '15-' " + layer.Ry[15] + " " + layer.Ry[16] + " " + layer.Ry[17] + " " + layer.Ry[18] + " " + layer.Ry[19] + " '20-' " + layer.Ry[20]);
-    }
+    myLog: function (layer) {
+        cc.log("X: " + layer.tetris[layer.t].x + " Y: " + layer.tetris[layer.t].y + " '0:' " + layer.Ry[0] + " " + layer.Ry[1] + " " + layer.Ry[2] + " " + layer.Ry[3] + " " + layer.Ry[4] + " '5:' " + layer.Ry[5] + " " + layer.Ry[6] + " " + layer.Ry[7] + " " + layer.Ry[8] + " " + layer.Ry[9] + " '10-' " + layer.Ry[10] + " " + layer.Ry[11] + " " + layer.Ry[12] + " " + layer.Ry[13] + " " + layer.Ry[14] + " '15-' " + layer.Ry[15] + " " + layer.Ry[16] + " " + layer.Ry[17] + " " + layer.Ry[18] + " " + layer.Ry[19] + " '20-' " + layer.Ry[20]);
+    },
 
+    tetrisCreate: function (layer) {
+        //   layer.t = parseInt(Math.random() * 84);
+        layer.t = layer.tArray.shift();
+        switch (layer.t % 7) {
+            case 0 :
+                layer.tetris[layer.t] = new cc.Sprite(res.TB);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 1:
+                layer.tetris[layer.t] = new cc.Sprite(res.IG);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 2 :
+                layer.tetris[layer.t] = new cc.Sprite(res.OO);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 3:
+                layer.tetris[layer.t] = new cc.Sprite(res.LR);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 4 :
+                layer.tetris[layer.t] = new cc.Sprite(res.JP);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 5:
+                layer.tetris[layer.t] = new cc.Sprite(res.NB);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+            case 6 :
+                layer.tetris[layer.t] = new cc.Sprite(res.ZP);
+                layer.tetris[layer.t].attr({
+                    x: layer.size.width * 4 / 9,
+                    y: layer.size.height * 99 / 100
+                });
+                this.addChild(layer.tetris[layer.t], 2);
+                break;
+        }
+    }
 });
 
 var Tetris01Scene = cc.Scene.extend({
