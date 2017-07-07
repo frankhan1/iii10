@@ -2,7 +2,7 @@ var Tetris01Layer = cc.Layer.extend({
     sprite: null,
     size: null,
     dx: 20, // remove range
-    dy: 1,  // dropping  range
+    dy: 2,  // dropping  range
     counter: 0,
     tetris: [], // [0 ~ 6] replace T,N,O,I,L,..
     t: 0, // [0 ~ 6] random index of tetris[]
@@ -18,12 +18,12 @@ var Tetris01Layer = cc.Layer.extend({
     zy: [[-20, -20, -20, 0, 0, 20, 20, 20, 0, 0], [-10, 10, 30, 30, 10, 10, -10, -30, -30, -10], [20, 20, 20, 0, 0, -20, -20, -20, 0, 0], [10, -10, -30, -30, -10, -10, 10, 30, 30, 10]],
     Ty: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
     tArray: [],
-    nArray: [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]], // 20*40
+    nArray: [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]], // 20*40
 
     ctor: function () {
         this._super();
         this.size = cc.winSize;
-        // for (var ii = 0; ii < 20; ii++) {
+        // for (var ii = 0; ii < 21; ii++) {
         //     cc.log("i= "+ii+" ");
         //     for (var j = 0; j< 40; j++) {
         //        // this.nArray[ii][j] === 8; // represent blank
@@ -146,7 +146,8 @@ var Tetris01Layer = cc.Layer.extend({
                         layer.unscheduleUpdate(layer);
                         break;
                     case 37 :   //   press <- key  ----> MOVE TO  LEFT
-                        if ((layer.tetris[layer.t].y - layer.tetris[layer.t].height / 2 > layer.tetris[layer.t].height) & (layer.tetris[layer.t].x - layer.tetris[layer.t].width / 2 > 250)) {
+                        if ((layer.tetris[layer.t].y - layer.tetris[layer.t].height / 2 > layer.tetris[layer.t].height + 10)
+                            & (layer.tetris[layer.t].x - layer.tetris[layer.t].width / 2 > 250)) {
                             layer.tetris[layer.t].x -= layer.dx;
                             //    cc.log("keyCode = " + keyCode);
                             //    cc.log("x " + layer.tetris[layer.t].x + " y " + layer.tetris[layer.t].y + " w " + layer.tetris[layer.t].width + " h " + layer.tetris[layer.t].height);
@@ -154,7 +155,12 @@ var Tetris01Layer = cc.Layer.extend({
                         break;
                     case 38 :   //  press ^ key  ----> counterclockwise TURN 90 degree
                         if (layer.tetris[layer.t].y - layer.tetris[layer.t].height / 2 > layer.tetris[layer.t].height) {
-                            layer.td += 1;
+                            if (layer.td < 3) {
+                                layer.td += 1;
+                            }
+                            else {
+                                layer.td = 0
+                            }
                             layer.tetris[layer.t].runAction(cc.rotateBy(0, -90));
                             //       cc.log("keyCode = " + keyCode);
                             //       cc.log("x " + layer.tetris[layer.t].x + " y " + layer.tetris[layer.t].y + " w " + layer.tetris[layer.t].width + " h " + layer.tetris[layer.t].height);
@@ -162,7 +168,8 @@ var Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 39 :  // press -> key ----> MOVE TO RIGHT
-                        if ((layer.tetris[layer.t].y - layer.tetris[layer.t].height / 2 > layer.tetris[layer.t].height) & (layer.tetris[layer.t].x + layer.tetris[layer.t].width / 2 < 640)) {
+                        if ((layer.tetris[layer.t].y - layer.tetris[layer.t].height / 2 > layer.tetris[layer.t].height + 10)
+                            & (layer.tetris[layer.t].x + layer.tetris[layer.t].width / 2 < 630)) {
                             layer.tetris[layer.t].x += layer.dx;
 
                             //      cc.log("keyCode = " + keyCode);
@@ -247,25 +254,20 @@ var Tetris01Layer = cc.Layer.extend({
                         if ((this.Ty[0][0] > this.Ry[tt - 1]) && (this.Ty[0][2] > this.Ry[tt]) && (this.Ty[0][4] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = this.Ry[tt];
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
+
+                            this.checkLine(this);
                             //     cc.log("nArray[tt-1][mm]= "+this.nArray[tt-1][mm]+" "+this.nArray[tt][mm] +" "+ this.nArray[tt+1][mm] +" " + this.nArray[tt][mm-1]);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                             // cc.log("0- " + this.Ry[0] + " 1- " + this.Ry[1] + " 2- " + this.Ry[2] + " 3- " + this.Ry[3] + " 4- " + this.Ry[4] + " 5- " + this.Ry[5] + " 6- " + this.Ry[6] + " 7- " + this.Ry[7] + " 8- " + this.Ry[8] + " 9- " + this.Ry[9] + " 10- " + this.Ry[10] + " 11- " + this.Ry[11] + " 12- " + this.Ry[12] + " 13- " + this.Ry[13] + " 14- " + this.Ry[14] + " 15- " + this.Ry[15] + " 16- " + this.Ry[16] + " 17- " + this.Ry[17] + " 18- " + this.Ry[18] + " 19- " + this.Ry[19] + " 20- " + this.Ry[20]);
                         }
 
@@ -274,28 +276,22 @@ var Tetris01Layer = cc.Layer.extend({
                         if ((this.Ty[1][9] > this.Ry[tt - 1]) && (this.Ty[1][1] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
+                            z = this.Ry[tt - 1];
                             this.Ry[tt - 1] = z + 60;
-                            this.Ry[tt] = z + 40;
+                            this.Ry[tt] += 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt][mm] = this.nArray[tt - 1][mm + 1] = this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
+                            this.checkLine(this);
 
                             this.tetrisCreate(this);
 
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  T _|_
@@ -309,47 +305,35 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
+                            this.checkLine(this);
 
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  T --|
                         if ((this.Ty[3][3] > this.Ry[tt - 1]) && (this.Ty[3][5] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
-                            this.Ry[tt - 1] = z + 40;
-                            this.Ry[tt] = z + 60;
+                            //  z =  this.Ry[tt];
+                            this.Ry[tt - 1] += 40;
+                            this.Ry[tt] += 60;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
+                            this.checkLine(this);
 
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -366,20 +350,14 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 2][mm] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
 
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // I |
@@ -391,20 +369,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt][mm - 2] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  I --
@@ -417,20 +388,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 2][mm] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  I |
@@ -442,20 +406,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt][mm - 2] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -472,20 +429,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // O O
@@ -498,20 +448,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    // O O
@@ -524,20 +467,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :     // O O
@@ -550,20 +486,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -581,24 +510,17 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm + 1] = this.nArray[tt - 1][mm - 1] = this.nArray[tt - 1][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // L  __|
-                        if ((this.Ty[1][3] > this.Ry[tt - 1]) && (this.Ty[1][8] > this.Ry[tt]) && (this.Ty[1][9] > this.Ry[tt + 1])) {
+                        if ((this.Ty[1][7] > this.Ry[tt - 1]) && (this.Ty[1][8] > this.Ry[tt]) && (this.Ty[1][9] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
                             z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
@@ -608,72 +530,51 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm - 1] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  L  7
                         if ((this.Ty[2][3] > this.Ry[tt - 1]) && (this.Ty[2][6] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
+                            z = this.Ry[tt];
                             this.Ry[tt - 1] = this.Ry[tt] = z + 60;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm + 1] = this.nArray[tt][mm - 1] = this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  L  ┌--
                         if ((this.Ty[3][2] > this.Ry[tt - 1]) && (this.Ty[3][4] > this.Ry[tt]) && (this.Ty[3][5] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = this.Ry[tt - 1];
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -691,72 +592,51 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // J 7
                         if ((this.Ty[1][6] > this.Ry[tt - 1]) && (this.Ty[1][7] > this.Ry[tt]) && (this.Ty[1][9] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = this.Ry[tt + 1];
                             this.Ry[tt - 1] = this.Ry[tt] = this.Ry[tt + 1] = z + 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.nArray[tt + 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  J |-
                         if ((this.Ty[2][5] > this.Ry[tt - 1]) && (this.Ty[2][8] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
+                            z = this.Ry[tt - 1];
                             this.Ry[tt - 1] = this.Ry[tt] = z + 60;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt][mm + 1] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm + 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    //  J └—
@@ -770,20 +650,13 @@ var Tetris01Layer = cc.Layer.extend({
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -794,108 +667,83 @@ var Tetris01Layer = cc.Layer.extend({
                         if ((this.Ty[0][8] > this.Ry[tt - 1]) && (this.Ty[0][0] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
-                            this.Ry[tt - 1] = z + 60;
-                            this.Ry[tt] = z + 40;
+                            cc.log("Ty[08],Ry[tt-1],ty[00],Ry[tt] " + this.Ty[0][8] + " " + this.Ry[tt - 1] + " " + this.Ty[0][0] + " " + this.Ry[tt]);
+                            //  z =  this.Ry[tt];
+                            this.Ry[tt - 1] += 40;
+                            this.Ry[tt] += 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm + 1] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // N _|▔
                         if ((this.Ty[1][6] > this.Ry[tt - 1]) && (this.Ty[1][7] > this.Ry[tt]) && (this.Ty[1][9] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 20;
-                            this.Ry[tt] = this.Ry[tt + 1] = z + 40;
+                            this.Ry[tt] = z + 40;
+                            this.Ry[tt + 1] += 20;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm - 1] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 :    //  N N
                         if ((this.Ty[2][3] > this.Ry[tt - 1]) && (this.Ty[2][5] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
-                            this.Ry[tt - 1] = z + 60;
-                            this.Ry[tt] = z + 40;
+                            //    z =  this.Ry[tt];
+                            this.Ry[tt - 1] += 40;
+                            this.Ry[tt] += 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm + 1] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :    // N _|▔
                         if ((this.Ty[3][1] > this.Ry[tt - 1]) && (this.Ty[3][2] > this.Ry[tt]) && (this.Ty[3][4] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
                             this.Ry[tt - 1] = z + 20;
-                            this.Ry[tt] = this.Ry[tt + 1] = z + 40;
+                            this.Ry[tt] = z + 40;
+                            this.Ry[tt + 1] += 20;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt][mm - 1] = this.nArray[tt][mm] = this.nArray[tt + 1][mm] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
@@ -906,115 +754,88 @@ var Tetris01Layer = cc.Layer.extend({
                         if ((this.Ty[0][8] > this.Ry[tt - 1]) && (this.Ty[0][0] > this.Ry[tt]) && (this.Ty[0][1] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
+                            z = Math.max(this.Ry[tt], this.Ry[tt + 1]);
                             this.Ry[tt - 1] = this.Ry[tt] = z + 40;
                             this.Ry[tt + 1] = z + 20;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 1 :    // Z ┌┘
                         if ((this.Ty[1][7] > this.Ry[tt - 1]) && (this.Ty[1][9] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
+                            z = this.Ry[tt - 1];
                             this.Ry[tt - 1] = z + 40;
-                            this.Ry[tt] = z + 60;
+                            this.Ry[tt] += 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm + 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 2 : //  Z Z
                         if ((this.Ty[2][3] > this.Ry[tt - 1]) && (this.Ty[2][5] > this.Ry[tt]) && (this.Ty[2][6] > this.Ry[tt + 1])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt], this.Ry[tt + 1]);
-                            this.Ry[tt - 1] = this.Ry[tt] = z + 40;
+                            z = Math.max(this.Ry[tt], this.Ry[tt + 1]);
+                            this.Ry[tt - 1] += 20;
+                            this.Ry[tt] = z + 40;
                             this.Ry[tt + 1] = z + 20;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm - 1] = this.nArray[tt + 1][mm - 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                     case 3 :   // Z ┌┘
                         if ((this.Ty[3][2] > this.Ry[tt - 1]) && (this.Ty[3][4] > this.Ry[tt])) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[tt - 1], this.Ry[tt]);
+                            z = this.Ry[tt - 1];
                             this.Ry[tt - 1] = z + 40;
-                            this.Ry[tt] = z + 60;
+                            this.Ry[tt] += 40;
 
                             var mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
                             cc.log(" t= " + this.t + " mm= " + mm + " tt= " + tt);
                             this.nArray[tt - 1][mm - 1] = this.nArray[tt - 1][mm] = this.nArray[tt][mm] = this.nArray[tt][mm + 1] = this.t;
-                            for (i = 0; i < 20; i++) {
-                                for (j = 0; j < 40; j++) {
-                                    if (this.nArray[i][j] != -1) {
-                                        cc.log("nArray[i][j]= " + i + " " + j + " " + this.nArray[i][j])
-                                    }
-                                }
-                            }
-
+                            this.checkLine(this);
                             this.tetrisCreate(this);
                             this.score(this);
                             this.myLog(this);
                             this.td = 0;
-                            this.tetris[this.t].y = 640;
-                            this.tetris[this.t].x = 480;
+                            // this.tetris[this.t].y = 640;
+                            // this.tetris[this.t].x = 480;
                         }
                         break;
                 }
                 break;
         }
 
-        cc.log("Ry[tt] " + this.Ry[tt] + " this.Ry[tt - 1] " + this.Ry[tt - 1] + " hight " + this.tetris[this.t].height + " width " + this.tetris[this.t].width);
+        //      cc.log("Ry[tt] " + this.Ry[tt] + " this.Ry[tt - 1] " + this.Ry[tt - 1] + " hight " + this.tetris[this.t].height + " width " + this.tetris[this.t].width);
         if (this.Ry[tt] >= 640) {
             this.unscheduleUpdate(this)
         }
@@ -1046,36 +867,75 @@ var Tetris01Layer = cc.Layer.extend({
 
     tetrisCreate: function (layer) {
         layer.t = layer.tArray.shift();
-        var rest = "";
+        //    layer.t = 6;
+        //   cc.log("tArray.length= "+layer.tArray.length);
+
+        var rest = "", x1 = 0;
         switch (layer.t % 7) {
             case 0 :
                 rest = res.TB;
+                x1 = 0;
                 break;
             case 1 :
                 rest = res.IG;
+                x1 = -30;
                 break;
             case 2 :
                 rest = res.OO;
+                x1 = -10;
                 break;
             case 3 :
                 rest = res.LR;
+                x1 = -30;
                 break;
             case 4 :
                 rest = res.JP;
+                x1 = -10;
                 break;
             case 5 :
                 rest = res.NB;
+                x1 = -10;
                 break;
             case 6 :
                 rest = res.ZP;
+                x1 = -40;
                 break;
         }
         layer.tetris[layer.t] = new cc.Sprite(rest);
         layer.tetris[layer.t].attr({
-            x: 430,
-            y: 630
+            x: 480 + x1,
+            y: 640
         });
         this.addChild(layer.tetris[layer.t], 2);
+
+    },
+
+    checkLine: function (layer) {
+        // for (i = 0; i < 20; i++) {
+        //     for (j = 0; j < 40; j++) {
+        //         if (layer.nArray[i][j] != -1) {
+        //  //           cc.log("nArray[i][j]= " + i + " " + j + " " + layer.nArray[i][j])
+        //         }
+        //     }
+        // }j
+
+        for (var j = 1; j < 40; j++) {
+            var w = 0;
+            for (var i = 1; i < 20; i++) {
+                if (layer.nArray[i][j] != -1) {
+                    w = w + 1;
+                }
+            }
+            if (w == 19) {
+                for (var ii = 1; ii < 20; ii++) {
+                    //       cc.log("w= "+w+" J= "+j+" ii= "+ii+"nArray[ii][j]= "+layer.nArray[ii][j]);
+                    this.removeChild(layer.tetris[layer.nArray[ii][j]]);
+                }
+            }
+        }
+    },
+
+    colorCreate: function (layer) {
 
     }
 });
