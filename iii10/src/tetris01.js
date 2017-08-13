@@ -10,47 +10,49 @@ Tetris01Layer = cc.Layer.extend({
     tetris: [0, 1, 2, 3, 4, 5, 6], // main sprite[0 ~ 6] replace T,I,O,L,J,N,Z..
     t: 0, // [0 ~ 6] random index of tetris[]
     td: 0, // change direction to 0v, 1> ,2^ ,3<
-    Ry: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], // max. value of y
-    ty: [[0, 0, -20, -20, 0, 0, 20, 20, 20, 20], [-30, -10, -10, 10, 10, 30, 30, 10, -10, -30], [0, 0, 20, 20, 0, 0, -20, -20, -20, -20], [30, 10, 10, -10, -10, -30, -30, -10, 10, 30]],
-    // ty[direction 0~v,1~>,2~^,3~<][points 0,1,2,3,4,5,6,7,8,9]
-    oy: [[-20, -20, -20, 0, 20, 20, 20, 0, 0, 0], [-20, 0, 20, 20, 20, 0, -20, -20, 0, 0], [20, 20, 20, 0, -20, -20, -20, 0, 0, 0], [20, 0, -20, -20, -20, 0, 20, 20, 0, 0]],
-    iy: [[-10, -10, -10, -10, -10, 10, 10, 10, 10, 10], [-40, -20, 0, 20, 40, 40, 20, 0, -20, -40], [10, 10, 10, 10, 10, -10, -10, -10, -10, -10], [40, 20, 0, -20, -40, -40, -20, 0, 20, 40]],
-    ly: [[-30, -30, -30, -10, -10, 10, 30, 30, 10, -10], [-20, 0, 20, 20, 0, 0, 0, -20, -20, -20], [30, 30, 30, 10, 10, -10, -30, -30, -10, 10], [20, 0, -20, -20, 0, 0, 0, 20, 20, 20]],
-    jy: [[-30, -30, -30, -10, 10, 30, 30, 10, -10, -10], [-20, 0, 20, 20, 20, 20, 0, 0, 0, -20], [30, 30, 30, 10, -10, -30, -30, -10, 10, 10], [20, 0, -20, -20, -20, -20, 0, 0, 0, 20]],
-    ny: [[-30, -30, -10, 10, 10, 30, 30, 10, -10, -10], [0, 20, 20, 20, 0, 0, -20, -20, -20, 0], [30, 30, 10, -10, -10, -30, -30, -10, 10, 10], [0, -20, -20, -20, 0, 0, 20, 20, 20, 0]],
-    zy: [[-20, -20, -20, 0, 0, 20, 20, 20, 0, 0], [-10, 10, 30, 30, 10, 10, -10, -30, -30, -10], [20, 20, 20, 0, 0, -20, -20, -20, 0, 0], [10, -10, -30, -30, -10, -10, 10, 30, 30, 10]],
-    Ty: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+    // Ry: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], // max. value of y
+    // ty: [[0, 0, -20, -20, 0, 0, 20, 20, 20, 20], [-30, -10, -10, 10, 10, 30, 30, 10, -10, -30], [0, 0, 20, 20, 0, 0, -20, -20, -20, -20], [30, 10, 10, -10, -10, -30, -30, -10, 10, 30]],
+    // // ty[direction 0~v,1~>,2~^,3~<][points 0,1,2,3,4,5,6,7,8,9]
+    // oy: [[-20, -20, -20, 0, 20, 20, 20, 0, 0, 0], [-20, 0, 20, 20, 20, 0, -20, -20, 0, 0], [20, 20, 20, 0, -20, -20, -20, 0, 0, 0], [20, 0, -20, -20, -20, 0, 20, 20, 0, 0]],
+    // iy: [[-10, -10, -10, -10, -10, 10, 10, 10, 10, 10], [-40, -20, 0, 20, 40, 40, 20, 0, -20, -40], [10, 10, 10, 10, 10, -10, -10, -10, -10, -10], [40, 20, 0, -20, -40, -40, -20, 0, 20, 40]],
+    // ly: [[-30, -30, -30, -10, -10, 10, 30, 30, 10, -10], [-20, 0, 20, 20, 0, 0, 0, -20, -20, -20], [30, 30, 30, 10, 10, -10, -30, -30, -10, 10], [20, 0, -20, -20, 0, 0, 0, 20, 20, 20]],
+    // jy: [[-30, -30, -30, -10, 10, 30, 30, 10, -10, -10], [-20, 0, 20, 20, 20, 20, 0, 0, 0, -20], [30, 30, 30, 10, -10, -30, -30, -10, 10, 10], [20, 0, -20, -20, -20, -20, 0, 0, 0, 20]],
+    // ny: [[-30, -30, -10, 10, 10, 30, 30, 10, -10, -10], [0, 20, 20, 20, 0, 0, -20, -20, -20, 0], [30, 30, 10, -10, -10, -30, -30, -10, 10, 10], [0, -20, -20, -20, 0, 0, 20, 20, 20, 0]],
+    // zy: [[-20, -20, -20, 0, 0, 20, 20, 20, 0, 0], [-10, 10, 30, 30, 10, 10, -10, -30, -30, -10], [20, 20, 20, 0, 0, -20, -20, -20, 0, 0], [10, -10, -30, -30, -10, -10, 10, 30, 30, 10]],
+    // Ty: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
     // current direction & points value
     tArray: [], //  non-duplicate random numbers for sprite use
     nArray: [
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]],
-    // 22*41   check which position is occupied
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]],
+    // 22*32   check which position is occupied
     newSpit: false,  //   create new color sprite
     tt: 0, // x-axis
     mm: 0,  // y-axis
     clearYes: false,
     heiNo: false,
+    reStart: false,
+    EffectPlay: true,
 
     ctor: function () {
         this._super();
@@ -61,34 +63,63 @@ Tetris01Layer = cc.Layer.extend({
         }
         this.shuffle(this);
 
-        var title = new cc.LabelTTF("TETRIS", "Arial", 38);
+        var title = new cc.LabelTTF("俄羅斯方塊", "Arial", 38);
         title.x = this.size.width / 8;
         title.y = this.size.height * 8 / 9;
+        title.setColor(cc.color(255, 0, 0));
         title.ignoreAnchorPointForPosition(false);
         this.addChild(title, 1);
 
-        var title1 = new cc.LabelTTF("space key --> PAUSE ", "Arial", 20);
-        title1.x = this.size.width / 8;
+        var title5 = new cc.LabelTTF("韓鵬程 製作", "Arial", 20);
+        title5.x = 800;
+        title5.y = this.size.height * 1 / 9;
+        title5.setColor(cc.color(0, 0, 255));
+        title5.ignoreAnchorPointForPosition(false);
+        this.addChild(title5, 1);
+
+        var title1 = new cc.LabelTTF("空白鍵 --> 暫停 ", "Arial", 20);
+        title1.x = 100;
         title1.y = this.size.height * 6 / 9;
         title1.setColor(cc.color(0, 0, 255));
         title1.ignoreAnchorPointForPosition(false);
         this.addChild(title1, 1);
 
-        var title2 = new cc.LabelTTF("enter key --> RESUME ", "Arial", 20);
-        title2.x = this.size.width / 8;
+        var title2 = new cc.LabelTTF("enter鍵 --> 繼續 ", "Arial", 20);
+        title2.x = 100;
         title2.y = this.size.height * 5 / 9;
         title2.setColor(cc.color(0, 0, 255));
         title2.ignoreAnchorPointForPosition(false);
         this.addChild(title2, 1);
 
-        var title3 = new cc.LabelTTF("◤left▲turn▼down◥right", "Arial", 20);
-        title3.x = this.size.width / 8;
+        var title3 = new cc.LabelTTF("▲翻轉  ▼快墜", "Arial", 20);
+        title3.x = 800;
         title3.y = this.size.height * 4 / 9;
-        title3.setColor(cc.color(0, 0, 255));
+        title3.setColor(cc.color(255,0,255));
         title3.ignoreAnchorPointForPosition(false);
         this.addChild(title3, 1);
 
-        var t2 = new cc.LabelTTF("SCORE : ", "", 20);
+        var title3a = new cc.LabelTTF("◄左移  ►右移", "Arial", 20);
+        title3a.x = 800;
+        title3a.y = this.size.height * 3 / 9;
+        title3a.setColor(cc.color(255, 0, 255));
+        title3a.ignoreAnchorPointForPosition(false);
+        this.addChild(title3a, 1);
+
+        var title4 = new cc.LabelTTF("esc  鍵 --> 重新", "Arial", 20);
+        title4.x = 100;
+        title4.y = this.size.height * 4 / 9;
+        title4.setColor(cc.color(0, 0, 255));
+        title4.ignoreAnchorPointForPosition(false);
+        this.addChild(title4, 1);
+
+        var title4a = new cc.LabelTTF("backspace --> 結束", "Arial", 20);
+        title4a.x = 100;
+        title4a.y = this.size.height * 3 / 9;
+        title4a.setColor(cc.color(0, 0, 255));
+        title4a.ignoreAnchorPointForPosition(false);
+        this.addChild(title4a, 1);
+
+        var t2 = new cc.LabelTTF("得分 : ", "", 20);
         t2.x = 750;
         t2.y = this.size.height * 8 / 10;
         t2.setColor(cc.color(255, 0, 0));
@@ -112,7 +143,7 @@ Tetris01Layer = cc.Layer.extend({
         this.t3c.ignoreAnchorPointForPosition(false);
         this.addChild(this.t3c, 1);
 
-        var t4 = new cc.LabelTTF("TIME : ", "", 20);
+        var t4 = new cc.LabelTTF("時間 : ", "", 20);
         t4.x = 750;
         t4.y = this.size.height * 7 / 10;
         t4.setColor(cc.color(255, 0, 0));
@@ -150,6 +181,7 @@ Tetris01Layer = cc.Layer.extend({
         });
         this.addChild(this.tetris, 0);
 
+        this.onEnterTransitionDidFinish();
         this.tetrisCreate(this);
         this.myKeyListener(this);
         this.scheduleUpdate(this);
@@ -157,453 +189,606 @@ Tetris01Layer = cc.Layer.extend({
         return true;
     },
 
+    onEnterTransitionDidFinish: function () {
+        this._super();
+        // cc.log("Background Music");
+        cc.audioEngine.playMusic("res/bgMusic.mp3", true);
+    },
+
     myKeyListener: function (layer) {
         cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode, event) {
-                switch (keyCode) {
-                    case  13 :  //   press space key ---->  PAUSE
-                        layer.scheduleUpdate(layer);
-                        break;
-                    case  32 :  //   press enter key ----> CONTINUE
-                        layer.unscheduleUpdate(layer);
-                        break;
-                    case  37 :   //   press <- key  ----> MOVE TO  LEFT
-                        if ((layer.td % 2) == 0) {      // no changed the direction
-                            wid = layer.tetris[layer.t].width;
-                            hei = layer.tetris[layer.t].height
-                        } else {                        // be changed the direction
-                            wid = layer.tetris[layer.t].height;
-                            hei = layer.tetris[layer.t].width
-                        }
-                        ////
-                        // layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) +1;  //  current X position
-                        layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
-                        // cc.log("x= "+layer.tetris[layer.t].x+" y= "+layer.tetris[layer.t].y);
-                        switch (layer.t % 7) {
-                            case 0:   //  T
-                                switch (layer.td) {
-                                    case 0 : //  T T
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 2] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm][layer.tt - 1] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 1] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 1: // I
-                                switch (layer.td) {
-                                    case 0 : //  I ▁
-                                    case 2:
-                                        if (layer.nArray[layer.tt - 3][layer.mm] == -1) {
-                                            layer.clearYes = true;
-                                            //             cc.log("tt " + layer.tt + " mm " + layer.mm);
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.tt - 1][layer.mm] == -1 && layer.nArray[layer.tt - 1][layer.mm - 1] == -1 && layer.nArray[layer.tt - 1][layer.mm + 1] == -1 && layer.nArray[layer.tt - 1][layer.mm - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 2: // O
-                                switch (layer.td) {
-                                    case 0 : //  O O
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 3: // L
-                                switch (layer.td) {
-                                    case 0 : //  L L
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 2] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm][layer.tt] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 2] == -1 && layer.nArray[layer.mm][layer.tt - 1] == -1 && layer.nArray[layer.mm - 1][layer.tt - 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 4: // J
-                                switch (layer.td) {
-                                    case 0 : //  J J
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 1] == -1 && layer.nArray[layer.mm][layer.tt - 1] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 2] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 5: // N
-                                switch (layer.td) {
-                                    case 0 : //  N N
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 2] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt - 1] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 6: // Z
-                                switch (layer.td) {
-                                    case 0 : //  Z Z
-                                    case 2:
-                                        if (layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.mm + 1][layer.tt - 1] == -1 && layer.nArray[layer.mm][layer.tt - 2] == -1 && layer.nArray[layer.mm - 1][layer.tt - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                        }
+                event: cc.EventListener.KEYBOARD,
+                onKeyPressed: function (keyCode, event) {
+                    layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
+                    layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;// current Y position
+                    cc.log("keyCode= " + keyCode);
+                    switch (keyCode) {
+                        case  8 :  //  press backspace key STOP
+        //                   window.location.replace("http://localhost:63342/tempRoadtrip/generic.html#three");
+      //                    location.replace("http://localhost:63342/tempRoadtrip/generic.html#three");
+                            location.href="http://localhost:63342/tempRoadtrip/generic.html#three";
 
-                        ////
-                        if ((layer.clearYes == true) && (layer.tetris[layer.t].y - hei / 2 >= 10)       //  Y range : 10 ~ 650
-                            && (layer.tetris[layer.t].x - wid / 2 >= 260)) {   //  X range : 250 ~ 650
-                            layer.tetris[layer.t].x -= layer.dx;
-                            layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
-                            layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
-                            //          cc.log("mm,tt " + layer.mm + " " + layer.tt);
-                            layer.clearYes = false;
-                        }
-
-                        break;
-                    case  38 ://  press ^ key  ----> counterclockwise TURN 90 degree
-                        if ((layer.td % 2) == 0) {          // no changed the direction
-                            wid = layer.tetris[layer.t].width;
-                            hei = layer.tetris[layer.t].height
-                        } else {
-                            wid = layer.tetris[layer.t].height;
-                            hei = layer.tetris[layer.t].width
-                        }
-                        if ((layer.tetris[layer.t].y - wid / 2 >= 10 ) && ((layer.tetris[layer.t].x - hei / 2 >= 260)
-                            && (layer.tetris[layer.t].x + hei / 2 <= 640) )
-                        ) {
-                            if (layer.td < 3) {    //  td range : 0 ~ 3
-                                layer.td += 1;
+                            break;
+                        case  13 :  //   press space key ---->  CONTINUE
+                            layer.scheduleUpdate(layer);
+                            cc.audioEngine.resumeMusic();
+                            cc.audioEngine.resumeAllEffects();
+                            break;
+                        case 27 :  //  press esc key --->  RESTART
+                            for (i = 1; i < 21; i++) {
+                                for (j = 1; j < 31; j++) {
+                                    if (layer.nArray[i][j] != -1) {
+                                        layer.nArray[i][j] = -1
+                                    }
+                                }
                             }
-                            else {
-                                layer.td = 0
+                            cc.audioEngine.stopMusic();
+                            cc.audioEngine.stopAllEffects();
+                            cc.director.pushScene(new Tetris01Scene()); //場景切換+變數傳遞
+                            break;
+                        case  32 :  //   press enter key ---->PAUSE
+                            // for (i = 1; i < 21; i++) {
+                            //     for (j = 1; j < 31; j++) {
+                            //         if (layer.nArray[i][j] != -1) {
+                            //             cc.log(i + ' ' + j + ' ' + layer.nArray[i][j] + ' ')
+                            //         }
+                            //     }
+                            // }
+                            cc.audioEngine.pauseMusic();
+                            cc.audioEngine.pauseAllEffects();
+                            layer.unscheduleUpdate(layer);
+
+                            break;
+                        case  37 :   //   press <- key  ----> MOVE TO  LEFT
+                            if ((layer.td % 2) == 0) {      // no changed the direction
+                                wid = layer.tetris[layer.t].width;
+                                hei = layer.tetris[layer.t].height
+                            } else {                        // be changed the direction
+                                wid = layer.tetris[layer.t].height;
+                                hei = layer.tetris[layer.t].width
+                            }
+                            switch (layer.t % 7) {
+                                case 0:   //  T
+                                    switch (layer.td) {
+                                        case 0 : //  T T
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm - 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm + 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 1][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 1: // I
+                                    switch (layer.td) {
+                                        case 0 : //  I ▁
+                                        case 2:
+                                            if (layer.nArray[layer.tt - 3][layer.mm] == -1) {
+                                                layer.clearYes = true;
+                                                //             cc.log("tt " + layer.tt + " mm " + layer.mm);
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if (layer.nArray[layer.tt - 1][layer.mm] == -1 && layer.nArray[layer.tt - 1][layer.mm - 1] == -1 && layer.nArray[layer.tt - 1][layer.mm + 1] == -1 && layer.nArray[layer.tt - 1][layer.mm - 2] == -1) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 2: // O
+                                    switch (layer.td) {
+                                        case 0 : //  O O
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 3: // L
+                                    switch (layer.td) {
+                                        case 0 : //  L L
+                                            if ((layer.nArray[layer.tt - 2][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 1][layer.mm] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 4: // J
+                                    switch (layer.td) {
+                                        case 0 : //  J J
+                                            if ((layer.nArray[layer.tt - 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 1][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 5: // N
+                                    switch (layer.td) {
+                                        case 0 : //  N N
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 1][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 6: // Z
+                                    switch (layer.td) {
+                                        case 0 : //  Z Z
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if ((layer.nArray[layer.tt - 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt - 2][layer.mm] == -1) && (layer.nArray[layer.tt - 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
                             }
 
-                            layer.tetris[layer.t].runAction(cc.rotateBy(0, -90));
-                            if ((layer.td % 2) == 1) {    //   first turn
-                                if ((layer.t % 7) == 1) {   //  I
-                                    layer.tetris[layer.t].x += 10;
-                                } else if ((layer.t % 7) !== 2) {  // != O
-                                    layer.tetris[layer.t].x -= 10;
-                                }
+                            ////
+                            if ((layer.clearYes == true) && ((layer.tetris[layer.t].y - hei / 2) >= 10)       //  Y range : 10 ~ 650
+                                && ((layer.tetris[layer.t].x - wid / 2 ) >= 260)) {   //  X range : 250 ~ 650
+                                layer.tetris[layer.t].x -= layer.dx;
+                                layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
+                                layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
+                                //          cc.log("mm,tt " + layer.mm + " " + layer.tt);
+                                layer.clearYes = false;
+                            }
+
+                            break;
+                        case  38 ://  press ^ key  ----> counterclockwise TURN 90 degree
+                            if ((layer.td % 2) == 0) {          // no changed the direction
+                                wid = layer.tetris[layer.t].width;
+                                hei = layer.tetris[layer.t].height
                             } else {
-                                if ((layer.t % 7) == 1) {  //  I
-                                    layer.tetris[layer.t].x -= 10;
-                                } else if ((layer.t % 7) !== 2) {  //  != O
-                                    layer.tetris[layer.t].x += 10;
-                                }
+                                wid = layer.tetris[layer.t].height;
+                                hei = layer.tetris[layer.t].width
                             }
-                            layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
+                            if ((layer.tetris[layer.t].y - wid / 2 >= 10 ) && ((layer.tetris[layer.t].x - hei / 2 >= 260)
+                                && (layer.tetris[layer.t].x + hei / 2 <= 640) )
+                            ) {
+                                if (layer.td < 3) {    //  td range : 0 ~ 3
+                                    layer.td += 1;
+                                }
+                                else {
+                                    layer.td = 0
+                                }
+
+                                layer.tetris[layer.t].runAction(cc.rotateBy(0, -90));
+                                if ((layer.td % 2) == 1) {    //   first turn
+                                    if ((layer.t % 7) == 1) {   //  I
+                                        layer.tetris[layer.t].x += 10;
+                                    } else if ((layer.t % 7) !== 2) {  // != O
+                                        layer.tetris[layer.t].x -= 10;
+                                    }
+                                } else {
+                                    if ((layer.t % 7) == 1) {  //  I
+                                        layer.tetris[layer.t].x -= 10;
+                                    } else if ((layer.t % 7) !== 2) {  //  != O
+                                        layer.tetris[layer.t].x += 10;
+                                    }
+                                }
+                                layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
+                                //     cc.log("mm,tt " + layer.mm + " " + layer.tt);
+
+
+                            }
+                            break;
+                        case  39 :  // press -> key ----> MOVE TO RIGHT
+                            if ((layer.td % 2) == 0) {              // no changed the direction
+                                wid = layer.tetris[layer.t].width;
+                                hei = layer.tetris[layer.t].height
+                            } else {
+                                wid = layer.tetris[layer.t].height;
+                                hei = layer.tetris[layer.t].width
+                            }
+
+                            switch (layer.t % 7) {
+                                case 0:   //  T
+                                    switch (layer.td) {
+                                        case 0 : //  T T
+                                            if ((layer.nArray[layer.tt + 2][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 1: // I
+                                    switch (layer.td) {
+                                        case 0 : //  I ▁
+                                        case 2:
+                                            if (layer.nArray[layer.tt + 2][layer.mm] == -1) {
+                                                //       cc.log("tt " + layer.tt + " mm " + layer.mm + " " + layer.nArray[layer.tt + 2][layer.mm] + " " + layer.tetris[layer.t].y);
+
+                                                layer.clearYes = true;
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if (layer.nArray[layer.tt + 1][layer.mm + 1] == -1 && layer.nArray[layer.tt + 1][layer.mm] == -1 && layer.nArray[layer.tt + 1][layer.mm - 1] == -1 && layer.nArray[layer.tt + 1][layer.mm - 2] == -1) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 2: // O
+                                    if ((layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1]) == -1) {
+                                        layer.clearYes = true
+                                    }
+                                    break;
+                                case 3: // L
+                                    switch (layer.td) {
+                                        case 0 : //  L L
+                                            if ((layer.nArray[layer.tt][layer.mm + 1] == -1) && (layer.nArray[layer.tt][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt + 2][layer.mm] == -1) && (layer.nArray[layer.tt + 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt + 2][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+
+                                case 4: // J
+                                    switch (layer.td) {
+                                        case 0 : //  J J
+                                            if ((layer.nArray[layer.tt + 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                            if ((layer.nArray[layer.tt + 2][layer.mm] == -1) && (layer.nArray[layer.tt + 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 2:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((layer.nArray[layer.tt][layer.mm] == -1) && (layer.nArray[layer.tt + 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 5: // N
+                                    switch (layer.td) {
+                                        case 0 : //  N N
+                                        case 2:
+                                            if ((layer.nArray[layer.tt][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if ((layer.nArray[layer.tt + 2][layer.mm] == -1) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 6: // Z
+                                    switch (layer.td) {
+                                        case 0 : //  Z Z
+                                        case 2:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt + 2][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                        case 1:
+                                        case 3:
+                                            if ((layer.nArray[layer.tt + 1][layer.mm + 1] == -1) && (layer.nArray[layer.tt + 1][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)) {
+                                                layer.clearYes = true
+                                            }
+                                            break;
+                                    }
+                                    break;
+                            }
                             //     cc.log("mm,tt " + layer.mm + " " + layer.tt);
 
+                            ///
+                            if ((layer.clearYes == true) && ((layer.tetris[layer.t].y - hei / 2 ) >= 10)
+                                && ((layer.tetris[layer.t].x + wid / 2 ) <= 640)) {
+                                layer.tetris[layer.t].x += layer.dx;
+                                layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
+                                layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
+                                layer.clearYes = false;
+                            }
+                            break;
+                        case  40 :   // press v key  ----> faster dropping down
+                            if ((layer.td % 2) == 0) {              // no changed the direction
+                                wid = layer.tetris[layer.t].width;
+                                hei = layer.tetris[layer.t].height
+                            } else {
+                                wid = layer.tetris[layer.t].height;
+                                hei = layer.tetris[layer.t].width
+                            }
+                            layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;  //   !  .y - 10)
+                            layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;
+                            //  current X position
+                            //  cc.log("x= " + layer.tetris[layer.t].x);
+                            switch (layer.t % 7) {
+                                case 0 :   //  T
+                                    switch (layer.td) {
+                                        case 0 : //  T T
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 1] == -1 ) && (layer.nArray[layer.tt][layer.mm - 2] == -1 )
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1 ) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 2] == -1 ) && (layer.nArray[layer.tt][layer.mm - 3] == -1 )
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 2] == -1 ) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // T  |--
 
-                        }
-                        break;
-                    case  39 :  // press -> key ----> MOVE TO RIGHT
-                        if ((layer.td % 2) == 0) {              // no changed the direction
-                            wid = layer.tetris[layer.t].width;
-                            hei = layer.tetris[layer.t].height
-                        } else {
-                            wid = layer.tetris[layer.t].height;
-                            hei = layer.tetris[layer.t].width
-                        }
-                        ///
-                        // layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) +1 ;  //  current X position
-                        layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1 ) && (layer.nArray[layer.tt][layer.mm - 1] == -1 )
+                                                && (layer.nArray[layer.tt - 1][layer.mm - 3] == -1 ) && (layer.nArray[layer.tt][layer.mm - 2] == -1 )
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 2 :    //  T _|_
 
-                        switch (layer.t % 7) {
-                            case 0:   //  T
-                                switch (layer.td) {
-                                    case 0 : //  T T
-                                        if (layer.nArray[layer.mm][layer.tt + 2] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm + 1][layer.tt] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm + 1][layer.tt + 1] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 1: // I
-                                switch (layer.td) {
-                                    case 0 : //  I ▁
-                                    case 2:
-                                        if (layer.nArray[layer.tt + 2][layer.mm] == -1) {
-                                            cc.log("mm,tt " + layer.mm + " " + layer.tt + " " + layer.nArray[layer.tt + 2][layer.mm] + " " + layer.tetris[layer.t].y);
-                                            // for (i = 9; i < 13; i++) {
-                                            //     for (j = 1; j < 21; j++) {
-                                            //         cc.log("i " + i + " " + layer.nArray[i][j]);
-                                            //
-                                            //     }
-                                            // }
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1 ) && (layer.nArray[layer.tt][layer.mm - 2] == -1 )
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 2] == -1 ) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1 ) && (layer.nArray[layer.tt][layer.mm - 3] == -1 )
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 3] == -1 ) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 3 :    //  T --|
 
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 1] == -1 ) && (layer.nArray[layer.tt][layer.mm - 2] == -1 )
+                                                && (layer.nArray[layer.tt - 1][layer.mm - 2] == -1 ) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 1 :   //  I
+                                    switch (layer.td) {
+                                        //  .....
+                                        case 0 : //  I ▁
+                                        case 2:
+                                            if ((layer.nArray[layer.tt - 2][layer.mm - 1] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 1] == -1 )
+                                                && (layer.nArray[layer.tt][layer.mm - 1] == -1 ) && (layer.nArray[layer.tt + 1][layer.mm - 1] == -1 )
+                                                && (layer.nArray[layer.tt - 2][layer.mm - 2] == -1) && (layer.nArray[layer.tt - 1][layer.mm - 2] == -1)
+                                                && (layer.nArray[layer.tt][layer.mm - 2] == -1 ) && (layer.nArray[layer.tt + 1][layer.mm - 2] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // I |
+                                        case 3 :
+                                            if ((layer.nArray[layer.tt][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 4] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 2 :   //  O
+                                    if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1)
+                                        && (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                        && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                        layer.tetris[layer.t].y -= 40
+                                    }
+                                    break;
+                                case 3 :   //  L
+                                    switch (layer.td) {
+                                        case 0 : //  L L
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // L  __|
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1)
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 3] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 2 :    //  L  7
+                                            if ((layer.nArray[layer.tt - 1][layer.mm] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 1] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 3 :    //  L  ┌--
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 1] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 4 :   //  J
+                                    switch (layer.td) {
+                                        case 0 : //  J J
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // J --i
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 1] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 3] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 2 :    //  J |-
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 3 :    //  J └—
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 3] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 5 :   //  N
+                                    switch (layer.td) {
+                                        case 0 : //  N N
+                                        case 2 :
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 1] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // N _|▔
+                                        case 3 :
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 1] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1) &&
+                                                (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
 
-                                            layer.clearYes = true;
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.tt + 1][layer.mm + 1] == -1 && layer.nArray[layer.tt + 1][layer.mm] == -1 && layer.nArray[layer.tt + 1][layer.mm - 1] == -1 && layer.nArray[layer.tt + 1][layer.mm - 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 2: // O
-                                switch (layer.td) {
-                                    case 0 : //  O O
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 3: // L
-                                switch (layer.td) {
-                                    case 0 : //  L L
-                                        if (layer.nArray[layer.mm + 1][layer.tt] == -1 && layer.nArray[layer.mm][layer.tt] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm][layer.tt + 2] == -1 && layer.nArray[layer.mm - 1][layer.tt + 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt + 1] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt + 2] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 4: // J
-                                switch (layer.td) {
-                                    case 0 : //  J J
-                                        if (layer.nArray[layer.mm + 1][layer.tt + 1] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                        if (layer.nArray[layer.mm][layer.tt + 2] == -1 && layer.nArray[layer.mm - 1][layer.tt + 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt + 1] == -1 && layer.nArray[layer.mm][layer.tt] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt] == -1 && layer.nArray[layer.mm - 1][layer.tt + 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 5: // N
-                                switch (layer.td) {
-                                    case 0 : //  N N
-                                    case 2:
-                                        if (layer.nArray[layer.mm + 1][layer.tt] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.mm][layer.tt + 2] == -1 && layer.nArray[layer.mm - 1][layer.tt + 1] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 6: // Z
-                                switch (layer.td) {
-                                    case 0 : //  Z Z
-                                    case 2:
-                                        if (layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt + 2] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                    case 1:
-                                    case 3:
-                                        if (layer.nArray[layer.mm + 1][layer.tt + 1] == -1 && layer.nArray[layer.mm][layer.tt + 1] == -1 && layer.nArray[layer.mm - 1][layer.tt] == -1) {
-                                            layer.clearYes = true
-                                        }
-                                        break;
-                                }
-                                break;
-                        }
-                        cc.log("mm,tt " + layer.mm + " " + layer.tt);
+                                    }
+                                    break;
+                                case 6 :   //  Z
+                                    switch (layer.td) {
+                                        case 0 : //  Z Z
+                                        case 2 :
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 1] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1)
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 2] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 3] == -1)
+                                                && (layer.nArray[layer.tt + 1][layer.mm - 3] == -1) && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
+                                        case 1 :    // Z ┌┘
+                                        case 3 :
+                                            if ((layer.nArray[layer.tt - 1][layer.mm - 2] == -1) && (layer.nArray[layer.tt][layer.mm - 1] == -1) &&
+                                                (layer.nArray[layer.tt - 1][layer.mm - 3] == -1) && (layer.nArray[layer.tt][layer.mm - 2] == -1)
+                                                && ((layer.tetris[layer.t].y - hei / 2 ) >= 50)) {
+                                                layer.tetris[layer.t].y -= 40
+                                            }
+                                            break;
 
-                        ///
-                        if ((layer.clearYes == true) && (layer.tetris[layer.t].y - hei / 2 >= 10)
-                            && (layer.tetris[layer.t].x + wid / 2 <= 640)) {
-                            layer.tetris[layer.t].x += layer.dx;
-                            layer.tt = parseInt((layer.tetris[layer.t].x - 250) / 20) + 1;  //  current X position
-                            layer.mm = parseInt((layer.tetris[layer.t].y - 10) / 20) + 1;   // current Y position
-                            layer.clearYes = false;
-                        }
-                        break;
-                    case  40 :   // press v key  ----> faster dropping down
-                        if ((layer.td % 2) == 0) {              // no changed the direction
-                            wid = layer.tetris[layer.t].width;
-                            hei = layer.tetris[layer.t].height
-                        } else {
-                            wid = layer.tetris[layer.t].height;
-                            hei = layer.tetris[layer.t].width
-                        }
-                        if (layer.tetris[layer.t].y - hei / 2 >= 50) {
-                            layer.tetris[layer.t].y -= 40;
-                        }
-                        break;
-                    default :
-                        //                      cc.log(" Ty[] " + layer.Ty);
-                        break;
+                                    }
+                                    break;
+                            }
+                            break;
+                        default :
+//                      cc.log(" Ty[] " + layer.Ty);
+                            break;
+                    }
                 }
-            }
-        }, this);
+            },
+            this
+        )
+        ;
     },
 
     update: function (dt) {
 
-        switch (this.t % 7) {  // random of 7 kinds shape T , I , O , L , J , N , Z
-            case 0 :   //  T
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.ty[i][j] // current direction & points value
-                    }
-                }
-                break;
-            case 1 :   //  I
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.iy[i][j]
-                    }
-                }
-                break;
-            case 2 :   //  O
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.oy[i][j]
-                    }
-                }
-                break;
-            case 3 :   //  L
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.ly[i][j]
-                    }
-                }
-                break;
-            case 4 :   //  J
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.jy[i][j]
-                    }
-                }
-                break;
-            case 5 :   //  N
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.ny[i][j]
-                    }
-                }
-                break;
-            case 6 :   //  Z
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 10; j++) {
-                        this.Ty[i][j] = this.tetris[this.t].y + this.zy[i][j]
-                    }
-                }
-                break;
-        }
+
         this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;  //   !  .y - 10)
         this.tt = parseInt((this.tetris[this.t].x - 250) / 20) + 1;  //  current X position
         //  cc.log("x= " + this.tetris[this.t].x);
@@ -611,15 +796,13 @@ Tetris01Layer = cc.Layer.extend({
             case 0 :   //  T
                 switch (this.td) {
                     case 0 : //  T T
-                        if ((this.Ty[0][0] > this.Ry[this.tt - 1]) && (this.Ty[0][2] > this.Ry[this.tt]) && (this.Ty[0][4] > this.Ry[this.tt + 1])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 1] == -1 ) && (this.nArray[this.tt][this.mm - 2] == -1 ) && (this.nArray[this.tt + 1][this.mm - 1] == -1 )) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = this.Ry[this.tt];
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 40;
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;   // current Y position
-                            // cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                       //     cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -627,39 +810,31 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 1 :    // T  |--
-                        if ((this.Ty[1][9] > this.Ry[this.tt - 1]) && (this.Ty[1][1] > this.Ry[this.tt])) {
+
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1 ) && (this.nArray[this.tt][this.mm - 1] == -1 )) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt - 1] < this.Ry[this.tt]) {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 20;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 60;
-                                this.Ry[this.tt] = z + 40;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
                             this.nArray[this.tt][this.mm] = this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
+                            cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
                             this.td = 0;
+
                         }
                         break;
                     case 2 :    //  T _|_
-                        if ((this.Ty[2][6] > this.Ry[this.tt - 1]) && (this.Ty[2][7] > this.Ry[this.tt]) && (this.Ty[2][8] > this.Ry[this.tt + 1])) {
+
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1 ) && (this.nArray[this.tt][this.mm - 2] == -1 )
+                            && (this.nArray[this.tt + 1][this.mm - 2] == -1 )) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt + 1] = z + 20;
-                            this.Ry[this.tt] = z + 40;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            //   cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -667,21 +842,15 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 3 :    //  T --|
-                        if ((this.Ty[3][3] > this.Ry[this.tt - 1]) && (this.Ty[3][5] > this.Ry[this.tt])) {
+
+                        if ((this.nArray[this.tt - 1][this.mm - 1] == -1 ) && (this.nArray[this.tt][this.mm - 2] == -1 )) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt - 1] <= this.Ry[this.tt]) {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 60;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 20;
-                                this.Ry[this.tt] = z + 40;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -692,87 +861,36 @@ Tetris01Layer = cc.Layer.extend({
                 break;
             case 1 :   //  I
                 switch (this.td) {
+                    //  .....
                     case 0 : //  I ▁
-                        if ((this.Ty[0][0] > this.Ry[this.tt - 2]) && (this.Ty[0][1] > this.Ry[this.tt - 1]) && (this.Ty[0][2] > this.Ry[this.tt]) && (this.Ty[0][3] > this.Ry[this.tt + 1])) {
+                    case 2:
+                        if ((this.nArray[this.tt - 2][this.mm - 1] == -1) && (this.nArray[this.tt - 1][this.mm - 1] == -1)
+                            && (this.nArray[this.tt][this.mm - 1] == -1 ) && (this.nArray[this.tt + 1][this.mm - 1]) == -1) {
                             this.tetris[this.t].y -= this.dy;
-
                         } else {
-                            //        cc.log("mm= " + this.mm + "tt= " + this.tt);  !! (this.mm > 1) &&
-                            //        if ((this.Ry[this.tt] > 10 ) && (this.mm > 1) && (this.nArray[this.tt - 2][this.mm - 1] == -1) && (this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 1] == -1 ) && ( this.nArray[this.tt + 1][this.mm - 1])) {
-                            if ((this.nArray[this.tt - 2][this.mm - 1] == -1) && (this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 1] == -1 ) && ( this.nArray[this.tt + 1][this.mm - 1])) {
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
 
-                                this.tetris[this.t].y -= this.dy;
-                                this.heiNo = true;
-                            } else {
-                                //       if (!this.heiNo) {
-                                z = Math.max(this.Ry[this.tt - 2], this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                                this.Ry[this.tt - 2] = this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                                this.heiNo = false;
-                                //       }
-
-                                //        this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                                //  cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                                this.nArray[this.tt - 2][this.mm] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
-                                this.ccLog(this);
-                                this.score(this);
-                                this.checkLine(this);
-                                this.tetrisCreate(this);
-                                this.td = 0;
-                            }
-                        }
-                        break;
-                    case 1 :    // I |
-                        if ((this.Ty[1][9] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            this.Ry[this.tt] += 80;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm - 2] = this.t;
-                            this.ccLog(this);
+                            //    cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                            //    cc.log(" t= " + this.t + " tt= " + this.tt + " mm= " + this.mm);
+                            this.nArray[this.tt - 2][this.mm] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
+                            //      cc.log("nArray[tt-2~+1][mm]= " + this.nArray[this.tt - 2][this.mm] + " " + this.nArray[this.tt - 1][this.mm] + " " + this.nArray[this.tt][this.mm] + " " + this.nArray[this.tt + 1][this.mm]);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
                             this.td = 0;
                         }
-                        break;
-                    case 2 :    //  I --
-                        if ((this.Ty[2][5] > this.Ry[this.tt - 2]) && (this.Ty[2][6] > this.Ry[this.tt - 1]) && (this.Ty[2][7] > this.Ry[this.tt]) && (this.Ty[2][8] > this.Ry[this.tt + 1])) {
+                        break
+                    case 1 :    // I |
+                    case 3:
+                        if (this.nArray[this.tt][this.mm - 3] == -1) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            cc.log("mm= " + this.mm + "tt= " + this.tt);
-                            //      if ((this.Ry[this.tt] > 10 ) && (this.mm > 1) && (this.nArray[this.tt - 2][this.mm - 1] == -1) && (this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 1] == -1 ) && ( this.nArray[this.tt + 1][this.mm - 1])) {
-                            if ((this.nArray[this.tt - 2][this.mm - 1] == -1) && (this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 1] == -1 ) && ( this.nArray[this.tt + 1][this.mm - 1])) {
-
-                                this.tetris[this.t].y -= this.dy;
-                                this.heiNo = true;
-                            } else {
-                                //       if (!this.heiNo) {
-                                z = Math.max(this.Ry[this.tt - 2], this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                                this.Ry[this.tt - 2] = this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                                this.heiNo = false;
-                                //        }
-                                cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                                this.nArray[this.tt - 2][this.mm] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
-                                this.ccLog(this);
-                                this.score(this);
-                                this.checkLine(this);
-                                this.tetrisCreate(this);
-                                this.td = 0;
-                            }
-                        }
-                        break;
-                    case 3 :    //  I |
-                        if ((this.Ty[3][4] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            this.Ry[this.tt] += 80;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm - 2] = this.t;
-                            this.ccLog(this);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //          cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                            //          cc.log(" t= " + this.t + " tt= " + this.tt + " mm= " + this.mm);
+                            this.nArray[this.tt][this.mm - 2] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm + 1] = this.t;
+                            //          cc.log("nArray[tt][mm-2~+1]= " + this.nArray[this.tt][this.mm - 2] + " " + this.nArray[this.tt][this.mm - 1] + " " + this.nArray[this.tt][this.mm] + " " + this.nArray[this.tt][this.mm + 1]);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -782,91 +900,32 @@ Tetris01Layer = cc.Layer.extend({
                 }
                 break;
             case 2 :   //  O
-                switch (this.td) {
-                    case 0 : //  O O
-                        if ((this.Ty[0][0] > this.Ry[this.tt - 1]) && (this.Ty[0][1] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 40;
+                if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)) {
+                    this.tetris[this.t].y -= this.dy
+                } else {
+                    this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                    //   cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                    this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            //    cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
-                    case 1 :    // O O
-                        if ((this.Ty[1][6] > this.Ry[this.tt - 1]) && (this.Ty[1][7] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 40;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
-                    case 2 :    // O O
-                        if ((this.Ty[2][4] > this.Ry[this.tt - 1]) && (this.Ty[2][5] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 40;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
-                    case 3 :     // O O
-                        if ((this.Ty[3][2] > this.Ry[this.tt - 1]) && (this.Ty[3][3] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 40;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
+                    this.score(this);
+                    this.checkLine(this);
+                    this.tetrisCreate(this);
+                    this.td = 0;
                 }
                 break;
             case 3 :   //  L
                 switch (this.td) {
                     case 0 : //  L L
-                        if ((this.Ty[0][0] > this.Ry[this.tt - 1]) && (this.Ty[0][1] > this.Ry[this.tt])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = z + 60;
-                            this.Ry[this.tt] = z + 20;
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            //    cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+
                             this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -874,17 +933,12 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 1 :    // L  __|
-                        if ((this.Ty[1][7] > this.Ry[this.tt - 1]) && (this.Ty[1][8] > this.Ry[this.tt]) && (this.Ty[1][9] > this.Ry[this.tt + 1])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1) && (this.nArray[this.tt + 1][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 20;
-                            this.Ry[this.tt + 1] = z + 40;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //       cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm - 1] = this.nArray[this.tt + 1][this.mm] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -892,16 +946,14 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 2 :    //  L  7
-                        if ((this.Ty[2][3] > this.Ry[this.tt - 1]) && (this.Ty[2][6] > this.Ry[this.tt])) {
+                        if ((this.nArray[this.tt - 1][this.mm] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = this.Ry[this.tt];
-                            this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 60;
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            //       cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -909,19 +961,12 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 3 :    //  L  ┌--
-                        if ((this.Ty[3][2] > this.Ry[this.tt - 1]) && (this.Ty[3][4] > this.Ry[this.tt]) && (this.Ty[3][5] > this.Ry[this.tt + 1])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 1] == -1) && (this.nArray[this.tt + 1][this.mm - 1] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if (this.Ry[this.tt - 1] == z) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //        cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -933,17 +978,15 @@ Tetris01Layer = cc.Layer.extend({
             case 4 :   //  J
                 switch (this.td) {
                     case 0 : //  J J
-                        if ((this.Ty[0][0] > this.Ry[this.tt - 1]) && (this.Ty[0][1] > this.Ry[this.tt])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            this.Ry[this.tt - 1] = z + 20;
-                            this.Ry[this.tt] = z + 60;
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //    cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
                             this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -951,19 +994,14 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 1 :    // J --i
-                        if ((this.Ty[1][6] > this.Ry[this.tt - 1]) && (this.Ty[1][7] > this.Ry[this.tt]) && (this.Ty[1][9] > this.Ry[this.tt + 1])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 1] == -1)
+                            && (this.nArray[this.tt + 1][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if (this.Ry[this.tt + 1] == z) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //           cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.nArray[this.tt + 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -971,22 +1009,14 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 2 :    //  J |-
-                        if ((this.Ty[2][5] > this.Ry[this.tt - 1]) && (this.Ty[2][8] > this.Ry[this.tt])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt - 1] > this.Ry[this.tt]) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 60;
-                            } else if ((this.Ry[this.tt] - this.Ry[this.tt - 1]) < 40) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 20;
-                            }
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //           cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
+                            this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm + 1] = this.t;
+                            this.tetris[this.t].y += 10;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt][this.mm + 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm + 1] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -994,17 +1024,14 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 3 :    //  J └—
-                        if ((this.Ty[3][2] > this.Ry[this.tt - 1]) && (this.Ty[3][3] > this.Ry[this.tt]) && (this.Ty[3][4] > this.Ry[this.tt + 1])) {
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)
+                            && (this.nArray[this.tt + 1][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            this.Ry[this.tt - 1] = z + 40;
-                            this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //          cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -1016,23 +1043,15 @@ Tetris01Layer = cc.Layer.extend({
             case 5 :   //  N
                 switch (this.td) {
                     case 0 : //  N N
-                        if ((this.Ty[0][8] > this.Ry[this.tt - 1]) && (this.Ty[0][0] > this.Ry[this.tt])) {
+                    case 2 :
+                        if ((this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            //        cc.log("Ty[08],Ry[this.tt-1],ty[00],Ry[this.tt] " + this.Ty[0][8] + " " + this.Ry[this.tt - 1] + " " + this.Ty[0][0] + " " + this.Ry[this.tt]);
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt] >= this.Ry[this.tt - 1]) {
-                                this.Ry[this.tt - 1] = z + 60;
-                                this.Ry[this.tt] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 20;
-                            }
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //      cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
+                            this.tetris[this.t].y += 10;
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -1040,93 +1059,36 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 1 :    // N _|▔
-                        if ((this.Ty[1][6] > this.Ry[this.tt - 1]) && (this.Ty[1][7] > this.Ry[this.tt]) && (this.Ty[1][9] > this.Ry[this.tt + 1])) {
+                    case 3 :
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)
+                            && (this.nArray[this.tt + 1][this.mm - 1] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if ((this.Ry[this.tt + 1] > this.Ry[this.tt - 1] ) && (this.Ry[this.tt + 1] > this.Ry[this.tt])) {
-                                this.Ry[this.tt - 1] = z;
-                                this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 20;
-                                this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 40;
-                            }
-
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //        cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
-                    case 2 :    //  N N
-                        if ((this.Ty[2][3] > this.Ry[this.tt - 1]) && (this.Ty[2][5] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt] >= this.Ry[this.tt - 1]) {
-                                this.Ry[this.tt - 1] = z + 60;
-                                this.Ry[this.tt] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 20;
-                            }
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm + 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
                             this.td = 0;
                         }
                         break;
-                    case 3 :    // N _|▔
-                        if ((this.Ty[3][1] > this.Ry[this.tt - 1]) && (this.Ty[3][2] > this.Ry[this.tt]) && (this.Ty[3][4] > this.Ry[this.tt + 1])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if ((this.Ry[this.tt + 1] > this.Ry[this.tt - 1] ) && (this.Ry[this.tt + 1] > this.Ry[this.tt])) {
-                                this.Ry[this.tt - 1] = z;
-                                this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 20;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 20;
-                                this.Ry[this.tt] = this.Ry[this.tt + 1] = z + 40;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt][this.mm] = this.nArray[this.tt + 1][this.mm] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
+
                 }
                 break;
             case 6 :   //  Z
                 switch (this.td) {
                     case 0 : //  Z Z
-                        if ((this.Ty[0][8] > this.Ry[this.tt - 1]) && (this.Ty[0][0] > this.Ry[this.tt]) && (this.Ty[0][1] > this.Ry[this.tt + 1])) {
+                    case 2 :
+                        if ((this.nArray[this.tt - 1][this.mm - 1] == -1) && (this.nArray[this.tt][this.mm - 2] == -1)
+                            && (this.nArray[this.tt + 1][this.mm - 2] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if ((this.Ry[this.tt - 1] > this.Ry[this.tt] ) && (this.Ry[this.tt - 1] > this.Ry[this.tt + 1])) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 20;
-                                this.Ry[this.tt + 1] = z;
-                            } else {
-                                this.Ry[this.tt + 1] = z + 20;
-                                this.Ry[this.tt] = this.Ry[this.tt - 1] = z + 40;
-                            }
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            //           cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
+
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
@@ -1134,86 +1096,51 @@ Tetris01Layer = cc.Layer.extend({
                         }
                         break;
                     case 1 :    // Z ┌┘
-                        if ((this.Ty[1][7] > this.Ry[this.tt - 1]) && (this.Ty[1][9] > this.Ry[this.tt])) {
+                    case 3 :
+                        if ((this.nArray[this.tt - 1][this.mm - 2] == -1) && (this.nArray[this.tt][this.mm - 1] == -1)) {
                             this.tetris[this.t].y -= this.dy
                         } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt]);
-                            if (this.Ry[this.tt] > this.Ry[this.tt - 1]) {
-                                this.Ry[this.tt - 1] = z + 20;
-                                this.Ry[this.tt] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 60;
-                            }
+                            this.tetris[this.t].y -= ((this.tetris[this.t].y - 10) % 20);
+                            this.tetris[this.t].y += 10;
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
+                            //             cc.log("y " + (this.tetris[this.t].y) + " " + (this.tetris[this.t].y - 10) % 20);
                             this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm + 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
-                    case 2 : //  Z Z
-                        if ((this.Ty[2][3] > this.Ry[this.tt - 1]) && (this.Ty[2][5] > this.Ry[this.tt]) && (this.Ty[2][6] > this.Ry[this.tt + 1])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            z = Math.max(this.Ry[this.tt - 1], this.Ry[this.tt], this.Ry[this.tt + 1]);
-                            if ((this.Ry[this.tt - 1] > this.Ry[this.tt] ) && (this.Ry[this.tt - 1] > this.Ry[this.tt + 1])) {
-                                this.Ry[this.tt - 1] = this.Ry[this.tt] = z + 20;
-                                this.Ry[this.tt + 1] = z;
-                            } else {
-                                this.Ry[this.tt + 1] = z + 20;
-                                this.Ry[this.tt] = this.Ry[this.tt - 1] = z + 40;
-                            }
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm - 1] = this.nArray[this.tt + 1][this.mm - 1] = this.t;
-                            this.ccLog(this);
                             this.score(this);
                             this.checkLine(this);
                             this.tetrisCreate(this);
                             this.td = 0;
                         }
                         break;
-                    case 3 :   // Z ┌┘
-                        if ((this.Ty[3][2] > this.Ry[this.tt - 1]) && (this.Ty[3][4] > this.Ry[this.tt])) {
-                            this.tetris[this.t].y -= this.dy
-                        } else {
-                            if (this.Ry[this.tt] > this.Ry[this.tt - 1]) {
-                                this.Ry[this.tt - 1] = z + 20;
-                                this.Ry[this.tt] = z + 40;
-                            } else {
-                                this.Ry[this.tt - 1] = z + 40;
-                                this.Ry[this.tt] = z + 60;
-                            }
 
-                            this.mm = parseInt((this.tetris[this.t].y - 10) / 20) + 1;
-                            cc.log(" t= " + this.t + " this.mm= " + this.mm + " this.tt= " + this.tt);
-                            this.nArray[this.tt - 1][this.mm - 1] = this.nArray[this.tt - 1][this.mm] = this.nArray[this.tt][this.mm] = this.nArray[this.tt][this.mm + 1] = this.t;
-                            this.ccLog(this);
-                            this.score(this);
-                            this.checkLine(this);
-                            this.tetrisCreate(this);
-                            this.td = 0;
-                        }
-                        break;
                 }
                 break;
         }
 
-        if (this.Ry[this.tt] >= 640) {
-            for (i = 1; i < 31; i++) {
-                for (j = 1; j < 21; j++) {
-                    var ij = j + 20 * (i - 1);
-                    this.removeChild(this.tetris[this.nArray[j][i]]);
+        for (k = 1; k < 21; k++) {
+            if (this.nArray[k][30] != -1) {
+                this.reStart = true
+            }
+        }
+        if (this.reStart) {
+            this.reStart = false;
+            for (i = 1; i < 21; i++) {
+                for (j = 1; j < 31; j++) {
+                    var ij = i + 20 * (j - 1);
+                    this.removeChild(this.tetris[this.nArray[i][j]]);
                     this.removeChild(this.sprite[ij])
                 }
             }
             this.unscheduleUpdate(this);
+            cc.audioEngine.stopMusic("res/bgMusic.mp3");
+            cc.audioEngine.stopAllEffects();
+            if (this.isEffectPlay) {
+                cc.audioEngine.playEffect("res/Smuglyanka.mp3", true);
+                this.isEffectPlay = false;
+            } else {
+                cc.audioEngine.playEffect("res/Russian.mp3", true);
+                this.isEffectPlay = true;
+            }
         }
         var d = new Date();
         var n = d.toLocaleTimeString();
@@ -1241,10 +1168,10 @@ Tetris01Layer = cc.Layer.extend({
     ,
 
     ccLog: function (layer) {
-        cc.log("X: " + layer.tetris[layer.t].x + " Y: " + layer.tetris[layer.t].y + " '0:' " + layer.Ry[0] + " " + layer.Ry[1] + " " + layer.Ry[2] + " " + layer.Ry[3] + " " + layer.Ry[4] + " '5:' " + layer.Ry[5] + " " + layer.Ry[6] + " " + layer.Ry[7] + " " +
-            layer.Ry[8] + " " + layer.Ry[9] + " '10-' " + layer.Ry[10] + " " + layer.Ry[11] + " " + layer.Ry[12] + " " + layer.Ry[13] + " " + layer.Ry[14] + " '15-' " + layer.Ry[15] + " " + layer.Ry[16] + " " + layer.Ry[17] + " " + layer.Ry[18] + " " +
-            layer.Ry[19] + " '20-' " + layer.Ry[20]);
-        cc.log("tt= " + layer.tt + " mm= " + layer.mm + " nArray[layer.tt-1][layer.mm]= " + layer.nArray[layer.tt - 1][layer.mm] + " " + layer.nArray[layer.tt][layer.mm] + " " + layer.nArray[layer.tt + 1][layer.mm] + " " + layer.nArray[layer.tt][layer.mm - 1]);
+        //   cc.log("X: " + layer.tetris[layer.t].x + " Y: " + layer.tetris[layer.t].y + " '0:' " + layer.Ry[0] + " " + layer.Ry[1] + " " + layer.Ry[2] + " " + layer.Ry[3] + " " + layer.Ry[4] + " '5:' " + layer.Ry[5] + " " + layer.Ry[6] + " " + layer.Ry[7] + " " +
+        //        layer.Ry[8] + " " + layer.Ry[9] + " '10-' " + layer.Ry[10] + " " + layer.Ry[11] + " " + layer.Ry[12] + " " + layer.Ry[13] + " " + layer.Ry[14] + " '15-' " + layer.Ry[15] + " " + layer.Ry[16] + " " + layer.Ry[17] + " " + layer.Ry[18] + " " +
+        //        layer.Ry[19] + " '20-' " + layer.Ry[20]);
+        cc.log("tt= " + layer.tt + " mm= " + layer.mm + " nArray[tt-2~tt+1][layer.mm]= " + layer.nArray[layer.tt - 2][layer.mm] + " " + layer.nArray[layer.tt - 1][layer.mm] + " " + layer.nArray[layer.tt][layer.mm] + " " + layer.nArray[layer.tt + 1][layer.mm]);
         // cc.log("Ry[layer.tt] " + layer.Ry[layer.tt] + " layer.Ry[layer.tt - 1] " + layer.Ry[layer.tt - 1] + " hight " + layer.tetris[layer.t].height + " width " + layer.tetris[layer.t].width);
         //
         // for (var xi = 1; xi < 21; xi++) {
@@ -1252,12 +1179,13 @@ Tetris01Layer = cc.Layer.extend({
         //         cc.log(" xi= " + xi + " " + layer.nArray[xi]);
         //     }
         // }
-    },
+    }
+    ,
 
     tetrisCreate: function (layer) {
-        // layer.t = layer.tArray.shift();
+        layer.t = layer.tArray.shift();
         //  shift() read & move data form head , unshift() add plus data from head
-        layer.t = 1;
+        // layer.t = 6;
         var rest = "", x1 = 0;
         switch (layer.t % 7) {
             case 0 :
@@ -1323,6 +1251,15 @@ Tetris01Layer = cc.Layer.extend({
                         this.removeChild(layer.sprite[ij])
                     }
                 }
+                cc.audioEngine.stopMusic("res/bgMusic.mp3");
+                cc.audioEngine.stopAllEffects();
+                if (this.isEffectPlay) {
+                    cc.audioEngine.playEffect("res/Smuglyanka.mp3", true);
+                    this.isEffectPlay = false;
+                } else {
+                    cc.audioEngine.playEffect("res/Russian.mp3", true);
+                    this.isEffectPlay = true;
+                }
 
 
                 layer.counter += 500;
@@ -1340,11 +1277,11 @@ Tetris01Layer = cc.Layer.extend({
 
                 }
             }
-            for (i = 0; i < 22; i++) {
-                if (layer.Ry[i] > 10) {
-                    layer.Ry[i] -= 20;
-                }
-            }
+            // for (i = 0; i < 22; i++) {
+            //     if (layer.Ry[i] > 10) {
+            //         layer.Ry[i] -= 20;
+            //     }
+            // }
         }
 
 
